@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+th.board_item {
+	font-family: NanumGothic, Arial;
+	font-size: 20px;
+	background-color: #189AB4;
+	border-left: 1px solid #05445E;
+	border-top: 1px solid #05445E;;
+	border-bottom: 1px solid #05445E;
+	color: #ffffff;
+}
+
+td.board_content {
+	font-family: NanumGothic, Arial;
+	font-size: 20px;
+	background-color: #ffffff;
+	border-left: 1px solid #05445E;
+	border-bottom: 1px solid #05445E;
+}

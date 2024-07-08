@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+span.content_text {
+	font-size: 20px;
+	font-family: NanumGothic;
+	color: #05445E;
+	font-weight: bold;
+}
+
+td.content_item {
+	text-align: right;
+}
+
+td.content_rs {
+	width: 100px;
+	color: #EF7C8E;
+}
+
+td.content_button {
+	width: 160px;
+}
+
+input.input_box {
+	border: 1px solid #05445E;
+	width: 250px;
+	font-family: Arial;
+	font-size: 20px;
+	padding: 5px;
+}
+
+input.input_box02 {
+	border: 1px solid #05445E;
+	width: 500px;
+	font-family: Arial;
+	font-size: 20px;
+	padding: 5px;
+}
+
+.input_phone {
+	border: 1px solid #05445E;
+	width: 70px;
+	font-family: Arial;
+	font-size: 20px;
+	padding: 5px;
+}
+
+.input_email {
+	border: 1px solid #05445E;
+	width: 180px;
+	font-family: Arial;
+	font-size: 20px;
+	padding: 5px;
+}
+
+input.button {
+	border: 2px solid #3D550C;
+	width: 150px;
+	height: 40px;
+	font-family: NanumGothic;
+	font-size: 20px;
+	color: #ffffff;
+	padding: 5px;
+	background-color: #189AB4;
+}
+
+input.button:hover {
+	border: 2px solid #3D550C;
+	width: 150px;
+	height: 40px;
+	font-family: NanumGothic;
+	font-size: 20px;
+	color: #ffffff;
+	padding: 5px;
+	background-color: #05445E;
+	cursor: pointer;
+}
+
+td.content_box {
+	height: 400px;
+	background-color: #D4F1F4;
+}
+
+textarea {
+	border: 1px solid #05445E;
+	font-size: 20px;
+	font-family: NanumGothic, Arial;
+	padding: 5px;
+	width: 500px;
+}

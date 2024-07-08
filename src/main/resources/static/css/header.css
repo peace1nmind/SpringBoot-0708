@@ -1,0 +1,43 @@
+@charset "UTF-8";
+
+tr.header_line {
+	background-color: #05445E;
+	height: 70px;
+}
+
+td.space {
+	width: 58%;
+}
+
+td.menu {
+	width: 7%;
+	text-align: center;
+}
+
+span.menu {
+	color: #ffffff;
+	font-family: Arial;
+	font-size: 20px;
+}
+
+span.loginId {
+	color: #05445E;
+	font-family: Arial;
+	font-size: 20px;
+}
+
+a:link {
+	text-decoration: none;
+	color: inherit;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: #ffffff;
+	font-weight: bold;
+}
+
+td.pad {
+	height: 30px;
+}
+

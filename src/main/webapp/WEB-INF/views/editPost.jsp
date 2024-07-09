@@ -118,7 +118,7 @@
 						<td>
 						<td align="center">
 							<input class="button" type="submit" value="수정 완료">
-							<input class="button" type="button" value="취소" onclick="window.history.back()">
+							<input class="button" type="button" value="취소" onclick="history.back()">
 							<!--  
 							<input class="button" type="button" value="글 삭제" onclick="window.location.href='deletePost?boardnum=${bdto.boardnum }'">
 							-->

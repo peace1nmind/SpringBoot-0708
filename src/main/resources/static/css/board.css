@@ -87,7 +87,7 @@ a.board_content:visited {
 
 .tooltip_s .tooltiptext_s {
     visibility: hidden;
-    width: auto;
+    width: 120px;
     background-color: #555;
     color: #fff;
     text-align: center;

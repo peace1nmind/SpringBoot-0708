@@ -14,7 +14,7 @@ body {
 
 span.title_text01 {
 	font-size: 80px;
-	color: #05445E;
+	color: #000000;
 	font-family: Arial;
 	font-weight: bold;
 	
@@ -22,30 +22,30 @@ span.title_text01 {
 
 span.title_text02 {
 	font-size: 30px;
-	color: #05445E;
+	color: #000000;
 	font-family: Arial;
 }
 
 span.skill_text01 {
 	font-size: 70px;
-	color: #189AB4;
+	color: #828282;
 	font-family: Arial;
 	font-weight: bold;
 }
 
 span.skill_text02 {
 	font-size: 40px;
-	color: #75E6DA;
+	color: 	#a0a0a0;
 	font-family: Arial;
 	font-weight: bold;
 }
 
 td.skill_box {
-	background-color: #05445E;
+	background-color: #F5F5F5;
 }
 
 td.img_box {
-	background-color: #D4F1F4;
+	background-color: #F5F5F5;
 }
 
 .container {

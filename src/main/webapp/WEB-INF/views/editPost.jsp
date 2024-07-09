@@ -56,7 +56,7 @@
 						<td class="content_item">
 							<span class="content_text">닉네임 </span> 
 						</td>
-						<td>
+						<td class="content_text">
 							<input class="input_box" type="hidden" name="nickname" value="${bdto.nickname }">${bdto.nickname }
 						</td>
 					</tr>
@@ -65,7 +65,7 @@
 						<td class="content_item">
 							<span class="content_text">작성자 </span> 
 						</td>
-						<td>
+						<td class="content_text">
 							<input class="input_box" type="hidden" name="writer" value="${bdto.writer }">${bdto.writer }
 						</td>
 					</tr>
@@ -75,7 +75,7 @@
 						<td class="content_item">
 							<span class="content_text">제목 </span> 
 						</td>
-						<td>
+						<td class="content_text">
 							<input class="input_box02" type="text" name="title" value="${bdto.title }">
 						</td>
 					</tr>
@@ -84,7 +84,7 @@
 						<td class="content_item">
 							<span class="content_text">내용 </span> 
 						</td>
-						<td>
+						<td class="content_text">
 							<textarea rows="10" cols="40" name="content" value="${bdto.content }">${bdto.content }</textarea>
 						</td>
 					</tr>
@@ -93,21 +93,21 @@
 						<td class="content_item">
 							<span class="content_text">조회수 </span>
 						</td>
-						<td align="center">${bdto.hit }</td>
+						<td align="center" class="content_text">${bdto.hit }</td>
 					</tr>
 					
 					<tr>
 						<td class="content_item">
 							<span class="content_text">작성일 </span>
 						</td>
-						<td align="center">${bdto.postdate }</td>
+						<td align="center" class="content_text">${bdto.postdate }</td>
 					</tr>
 					
 					<tr>
 						<td class="content_item">
 							<span class="content_text">최종 수정일 </span>
 						</td>
-						<td align="center">${bdto.editdate }</td>
+						<td align="center" class="content_text">${bdto.editdate }</td>
 					</tr>
 					
 					<tr>

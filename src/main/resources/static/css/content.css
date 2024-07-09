@@ -7,8 +7,16 @@ span.content_text {
 	font-weight: bold;
 }
 
+td.content_text {
+	font-size: 20px;
+	font-family: NanumGothic, Arail;
+	color: #000000;
+	/* background-color: #ffffff; */
+}
+
 td.content_item {
 	text-align: right;
+	
 }
 
 td.content_rs {
@@ -77,7 +85,7 @@ input.button:hover {
 
 td.content_box {
 	height: 400px;
-	background-color: #D4F1F4;
+	background-color: #FDF5E6;
 }
 
 textarea {

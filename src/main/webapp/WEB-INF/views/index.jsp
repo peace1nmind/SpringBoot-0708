@@ -42,7 +42,7 @@
 							<span class="skill_text01">J</span><span class="skill_text02">AVA</span>
 						</td>
 						<td rowspan="6" class="img_box">
-							<img src="/resources/img/springboot.jpg">
+							<img src="/resources/img/springboot.jpg" height="600px">
 						</td>
 					</tr>
 					<tr>

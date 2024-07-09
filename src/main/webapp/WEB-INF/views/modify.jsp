@@ -24,7 +24,7 @@
 <script type="text/javascript" src="/resources/js/join.js"></script>
 
 </head>
-<body>
+<body onload="pwCur()">
 	
 	<%@ include file="include/header.jsp" %>
 	
@@ -77,7 +77,14 @@
 								<span class="content_text">이름 </span> 
 							</td>
 							<td>
-								<input class="input_box" type="text" name="name" value="${mdto.name }">
+								<c:choose>
+									<c:when test="${mdto.name.equals('관리자') }">
+										<input class="input_box" type="text" name="name" value="${mdto.name }" readonly="readonly">
+									</c:when>
+									<c:otherwise>
+										<input class="input_box" type="text" name="name" value="${mdto.name }">
+									</c:otherwise>
+								</c:choose>
 							</td>
 						</tr>
 						
@@ -86,7 +93,15 @@
 								<span class="content_text">닉네임 </span> 
 							</td>
 							<td>
-								<input class="input_box" type="text" name="nickname" value="${mdto.nickname }">
+								<c:choose>
+									<c:when test="${mdto.nickname.equals('관리자') }">
+										<input class="input_box" type="text" name="nickname" value="${mdto.nickname }" readonly="readonly">
+									</c:when>
+									<c:otherwise>
+										<input class="input_box" type="text" name="nickname" value="${mdto.nickname }">
+									</c:otherwise>
+								</c:choose>
+								
 							</td>
 						</tr>
 						
@@ -134,7 +149,7 @@
 						
 						<tr>
 							<td colspan="2" align="center">
-								<input class="button" type="reset" value="초기화" onclick="idCur()">
+								<input class="button" type="reset" value="초기화" onclick="pwCur()">
 								<input class="button" type="submit" value="수정완료">
 								<input class="button" type="button" value="취소" onclick="history.back()">
 							</td>

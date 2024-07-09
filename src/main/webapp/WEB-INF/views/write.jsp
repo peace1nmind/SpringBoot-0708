@@ -47,7 +47,7 @@
 						<td class="content_item">
 							<span class="content_text">닉네임 </span> 
 						</td>
-						<td>
+						<td class="content_text">
 							<input class="input_box" type="hidden" name="nickname" value="${mdto.nickname }">${mdto.nickname }
 						</td>
 					</tr>
@@ -56,7 +56,7 @@
 						<td class="content_item">
 							<span class="content_text">이름 </span> 
 						</td>
-						<td>
+						<td class="content_text">
 							<input class="input_box" type="hidden" name="writer" value="${mdto.name }">${mdto.name }
 						</td>
 					</tr>
@@ -66,7 +66,7 @@
 						<td class="content_item">
 							<span class="content_text">제목 </span> 
 						</td>
-						<td>
+						<td class="content_text">
 							<input class="input_box02" type="text" name="title">
 						</td>
 					</tr>
@@ -75,7 +75,7 @@
 						<td class="content_item">
 							<span class="content_text">내용 </span> 
 						</td>
-						<td>
+						<td class="content_text">
 							<textarea rows="10" cols="40" name="content"></textarea>
 						</td>
 					</tr>

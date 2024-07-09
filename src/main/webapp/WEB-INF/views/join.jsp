@@ -125,7 +125,7 @@
 							<td colspan="2" align="center">
 								<input class="button" type="reset" value="초기화" onclick="idCur()">
 								<input class="button" type="submit" value="가입완료">
-								<input class="button" type="button" value="로그인" onclick="window.location.href='login'">
+								<input class="button" type="button" value="취소" onclick="history.back()">
 							</td>
 						</tr>
 					</table>

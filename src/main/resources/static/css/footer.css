@@ -2,6 +2,7 @@
 
 tr.footer_line {
 	background-color: #05445E;
+	width:100%;
 	height: 40px;
 	text-align: center;
 }

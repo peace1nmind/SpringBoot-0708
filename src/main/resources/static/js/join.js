@@ -9,6 +9,15 @@ function idCur() {
 	, 0)
 }
 
+function pwCur() {
+	setTimeout(function() {
+			var pwF = document.joinForm.pw;
+			pwF.focus();
+			pwF.setSelectionRange(pwF.value.length, pwF.value.length);
+		}
+		, 0)
+}
+
 function joinCheck() {
 	var form = document.joinForm;
 	

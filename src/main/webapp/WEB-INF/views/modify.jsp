@@ -136,7 +136,7 @@
 							<td colspan="2" align="center">
 								<input class="button" type="reset" value="초기화" onclick="idCur()">
 								<input class="button" type="submit" value="수정완료">
-								<input class="button" type="button" value="취소" onclick="window.location.history.go(-1)">
+								<input class="button" type="button" value="취소" onclick="window.history.go(-1)">
 							</td>
 						</tr>
 					</table>

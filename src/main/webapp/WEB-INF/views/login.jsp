@@ -5,6 +5,7 @@
 -->
 
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -22,6 +23,12 @@
 
 </head>
 <body onload="idCur()">
+
+	<c:if test="${modifyFlag == 1 }">
+		<script type="text/javascript">
+			alert("회원정보가 수정되었습니다.\n다시 로그인해주세요.")
+		</script>
+	</c:if>
 	
 	<%@ include file="include/header.jsp" %>
 	

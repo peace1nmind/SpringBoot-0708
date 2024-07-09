@@ -52,6 +52,7 @@
 							${mdto.name }님 로그인을 축하드립니다.<br>
 							${mdto.name }님의 닉네임은 ${mdto.nickname }입니다.<br>
 							가입일은 ${mdto.signupdate } 입니다.<br><br>
+							<input class="button" type="button" value="게시판" onclick="window.location.href='board'">
 							<input class="button" type="button" value="글쓰기" onclick="window.location.href='write'">
 							</span>
 						</td>

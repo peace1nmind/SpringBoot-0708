@@ -2,13 +2,14 @@ package com.peace1nmind.d0708.dto;
 
 public class BoardDto {
 	
-	private int boardnum;
+	private String boardnum;
 	private String nickname;
 	private String writer;
 	private String title;
 	private String content;
 	private int hit;
 	private String postdate;
+	private String editdate;
 	
 	
 	public BoardDto() {
@@ -17,8 +18,8 @@ public class BoardDto {
 	}
 
 
-	public BoardDto(int boardnum, String nickname, String writer, String title, String content, int hit,
-			String postdate) {
+	public BoardDto(String boardnum, String nickname, String writer, String title, String content, int hit,
+			String postdate, String editdate) {
 		super();
 		this.boardnum = boardnum;
 		this.nickname = nickname;
@@ -27,15 +28,16 @@ public class BoardDto {
 		this.content = content;
 		this.hit = hit;
 		this.postdate = postdate;
+		this.editdate = editdate;
 	}
 
 
-	public int getBoardnum() {
+	public String getBoardnum() {
 		return boardnum;
 	}
 
 
-	public void setBoardnum(int boardnum) {
+	public void setBoardnum(String boardnum) {
 		this.boardnum = boardnum;
 	}
 
@@ -98,8 +100,16 @@ public class BoardDto {
 	public void setPostdate(String postdate) {
 		this.postdate = postdate;
 	}
-	
-	
-	
 
+
+	public String getEditdate() {
+		return editdate;
+	}
+
+
+	public void setEditdate(String editdate) {
+		this.editdate = editdate;
+	}
+	
+	
 }

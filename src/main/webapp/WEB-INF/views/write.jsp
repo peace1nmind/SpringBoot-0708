@@ -13,13 +13,15 @@
 <head>
 <meta charset="UTF-8">
 
-<title>Login</title>
+<title>Write</title>
 
 <link rel="stylesheet" href="/resources/css/title.css">
 <link rel="stylesheet" href="/resources/css/content.css">
 
+<script type="text/javascript" src="/resources/js/board.js"></script>
+
 </head>
-<body>
+<body onload="titleCur()">
 	
 	<%@ include file="include/header.jsp" %>
 	
@@ -38,7 +40,7 @@
 		
 		<tr>
 			<td align="center" class="content_box">
-				<form action="writeOk" name="writeForm" method="post">
+				<form action="writeOk" name="writeForm" method="post" onsubmit="return writeCheck()">
 				<table border="0" cellspacing="0" cellpadding="15">
 					
 					<tr>

@@ -13,7 +13,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>Login</title>
+<title>Join</title>
 
 <link rel="stylesheet" href="/resources/css/title.css">
 <link rel="stylesheet" href="/resources/css/content.css">

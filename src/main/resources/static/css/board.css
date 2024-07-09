@@ -10,6 +10,17 @@ th.board_item {
 	color: #ffffff;
 }
 
+th.board_item_end {
+	font-family: NanumGothic, Arial;
+	font-size: 20px;
+	background-color: #189AB4;
+	border-left: 1px solid #05445E;
+	border-top: 1px solid #05445E;;
+	border-bottom: 1px solid #05445E;
+	border-right: 1px solid #05445E;
+	color: #ffffff;
+}
+
 td.board_content {
 	font-family: NanumGothic, Arial;
 	font-size: 20px;
@@ -17,3 +28,86 @@ td.board_content {
 	border-left: 1px solid #05445E;
 	border-bottom: 1px solid #05445E;
 }
+
+td.board_content_end {
+	font-family: NanumGothic, Arial;
+	font-size: 20px;
+	background-color: #ffffff;
+	border-left: 1px solid #05445E;
+	border-bottom: 1px solid #05445E;
+	border-right: 1px solid #05445E;
+}
+
+a.board_content:hover {
+	font-family: NanumGothic, Arial;
+	font-size: 20px;
+	cursor: pointer;
+	color: #000000;
+}
+
+a.board_content:visited {
+	text-decoration: none;
+	font-family: NanumGothic, Arial;
+	font-size: 20px;
+	cursor: pointer;
+	color: #000000;
+}
+
+
+/* 툴팁 */
+.tooltip_b, .tooltip_s {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip_b .tooltiptext_b {
+    visibility: hidden;
+    width: auto;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+
+    /* 툴팁 위치 설정 */
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%; /* 툴팁을 수평으로 가운데 정렬 */
+    transform: translateX(-50%); /* 부모 요소를 기준으로 툴팁을 가운데 정렬 */
+
+    /* 툴팁 내용이 너무 길어질 경우 줄바꿈 처리 */
+    white-space: normal;
+}
+
+.tooltip_b:hover .tooltiptext_b {
+    visibility: visible;
+    opacity: 1;
+}
+
+.tooltip_s .tooltiptext_s {
+    visibility: hidden;
+    width: auto;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 0%;
+
+
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip_s:hover .tooltiptext_s {
+    visibility: visible;
+    opacity: 1;
+}
+

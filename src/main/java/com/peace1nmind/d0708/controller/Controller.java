@@ -2,19 +2,26 @@ package com.peace1nmind.d0708.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.peace1nmind.d0708.dao.BoardDao;
 import com.peace1nmind.d0708.dao.MembersDao;
+import com.peace1nmind.d0708.dto.BoardDto;
 import com.peace1nmind.d0708.dto.EmailDto;
 import com.peace1nmind.d0708.dto.MembersDto;
 import com.peace1nmind.d0708.dto.PhoneDto;
+import com.peace1nmind.d0708.dto.ViewDto;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -22,9 +29,14 @@ import jakarta.servlet.http.HttpSession;
 @org.springframework.stereotype.Controller
 public class Controller {
 	
+	/*  */
+	
 	@Autowired
 	SqlSession sqlSession;
 	
+	
+	
+	/* 기본 홈 */
 	@GetMapping("/")
 	public String home() {
 		return "index";
@@ -35,10 +47,14 @@ public class Controller {
 		return "index";
 	}
 	
+	
+	
+	/* 로그인 */
 	@GetMapping("/login")
 	public String login() {
 		return "login";
 	}
+	
 	
 	@PostMapping("/loginOk")
 	public String loginOk(HttpServletRequest request, Model model, HttpSession session) {
@@ -64,10 +80,14 @@ public class Controller {
 	
 	}
 	
+	
+	
+	/* 회원가입 */
 	@GetMapping("/join")
 	public String join() {
 		return "join";
 	}
+	
 	
 	@PostMapping("/joinOk")
 	public String joinOk(HttpServletRequest request, Model model) {
@@ -109,48 +129,9 @@ public class Controller {
 		
 	}
 	
-	@GetMapping("/profile")
-	public String profile() {
-		return "profile";
-	}
-	
-	@GetMapping("/contact")
-	public String contact() {
-		return "contact";
-	}
-	
-	@GetMapping("/write")
-	public String write(HttpSession session, Model model) {
-		
-		String sessionId = (String) session.getAttribute("sessionId");
-		
-		MembersDao mdao = sqlSession.getMapper(MembersDao.class);
-		MembersDto mdto = mdao.getInfo(sessionId);
-		
-		model.addAttribute("mdto", mdto);
-		
-		return "write";
-	}
-	
-	@PostMapping("/writeOk")
-	public String writeOk(HttpServletRequest request) {
-		
-		BoardDao bdao = sqlSession.getMapper(BoardDao.class);
-		bdao.write(request.getParameter("nickname"),
-					request.getParameter("writer"),
-					request.getParameter("title"),
-					request.getParameter("content"));
-		
-		return "board";
-	}
-	
-	@GetMapping("/board")
-	public String board() {
-		return "board";
-	}
 	
 	
-	
+	/* 로그아웃 */
 	@GetMapping("/logout")
 	public String logout(HttpSession session, HttpServletResponse response) {
 		
@@ -166,6 +147,7 @@ public class Controller {
 			
 			// 로그아웃
 			session.invalidate();
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -173,6 +155,9 @@ public class Controller {
 		return "login";
 	}
 	
+	
+	
+	/* 회원정보 수정 */
 	@GetMapping("/modify")
 	public String modify(HttpSession session, Model model) {
 		
@@ -185,8 +170,8 @@ public class Controller {
 		
 		String phone_all = mdto.getPhone();
 		String phone1 = phone_all.substring(0, 4);
-		String phone2 = phone_all.substring(4, 8);
-		String phone3 = phone_all.substring(8);
+		String phone2 = phone_all.substring(3, 7);
+		String phone3 = phone_all.substring(7);
 		
 		PhoneDto phone = new PhoneDto(phone1, phone2, phone3);
 		
@@ -203,8 +188,9 @@ public class Controller {
 		return "modify";
 	}
 	
+	
 	@PostMapping("/modifyOk")
-	public String modifyOk(HttpServletRequest request, HttpSession session) {
+	public String modifyOk(HttpServletRequest request, HttpSession session, Model model) {
 		
 		String id = request.getParameter("id");
 		String pw = request.getParameter("pw");
@@ -223,6 +209,218 @@ public class Controller {
 		// 로그아웃 시킴
 		session.invalidate();
 		
+		int modifyFlag = 1;
+		
+		model.addAttribute("modifyFlag", modifyFlag);
+		
 		return "login";
 	}
+	
+	
+	
+	/* 프로필 */
+	@GetMapping("/profile")
+	public String profile() {
+		return "profile";
+	}
+	
+	
+	
+	/* 연락 */
+	@GetMapping("/contact")
+	public String contact() {
+		return "contact";
+	}
+	
+	
+	
+	/* 글 작성 */
+	@GetMapping("/write")
+	public String write(HttpSession session, Model model, HttpServletResponse response) {
+		
+		String sessionId = (String) session.getAttribute("sessionId");
+		
+		// 로그인하지 않은 회원이 글쓰기 버튼을 ㅡㅋㄹ릭한 경우
+		if (sessionId == null) {
+			// 컨트롤러에서 경고창 띄우기
+			try {
+				// 경고창 텍스트를 인코딩
+				response.setContentType("text/html;charset=utf-8");
+				// 다시 인코딩 해줘야함
+				response.setCharacterEncoding("utf-8");
+				PrintWriter printWriter = response.getWriter();
+				printWriter.println("<script>alert('"+"로그인한 회원만 글을 쓸 수 있습니다."+"');location.href='"+"login"+"';</script>");
+				printWriter.flush();
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			MembersDao mdao = sqlSession.getMapper(MembersDao.class);
+			MembersDto mdto = mdao.getInfo(sessionId);
+			
+			model.addAttribute("mdto", mdto);
+		}
+		
+		return "write";
+	}
+	
+	
+	@PostMapping("/writeOk")
+	public String writeOk(HttpServletRequest request) {
+		
+		BoardDao bdao = sqlSession.getMapper(BoardDao.class);
+		bdao.write(request.getParameter("nickname"),
+					request.getParameter("writer"),
+					request.getParameter("title"),
+					request.getParameter("content"));
+		
+		return "redirect:board";
+	}
+	
+	
+	
+	/* 글 목록 */
+	@GetMapping("/board")
+	public String board(Model model) {
+		
+		BoardDao bdao = sqlSession.getMapper(BoardDao.class);
+		ArrayList<BoardDto> blist = bdao.list();
+		
+		model.addAttribute("blist", blist);
+		
+		return "board";
+	}
+	
+	
+	
+	/* 글 내용 */
+	@SuppressWarnings({ "unchecked" })
+	@GetMapping("/content")
+	public String content(HttpServletRequest request, Model model, HttpSession session) {
+		
+		String boardnum = request.getParameter("boardnum");
+		
+		BoardDao bdao = sqlSession.getMapper(BoardDao.class);
+		
+		ArrayList<String> viewList = (ArrayList<String>) session.getAttribute("viewList");
+		
+//		System.out.println("viewList:"+viewList);
+//		System.out.println("isEmpty:"+(viewList == null));
+		
+		if (!bdao.content(boardnum).getNickname().equals(session.getAttribute("sessionNickname"))) {
+			
+			if (viewList==null) {
+				bdao.hitUp(boardnum);
+				viewList = new ArrayList<>();
+				viewList.add(boardnum);
+				session.setAttribute("viewList", viewList);
+				
+				System.out.println("vieList:" + session.getAttribute("viewList"));
+			} else {
+				boolean containFlag = false;
+				
+				if (viewList.contains(boardnum)) {
+					containFlag = true;
+				}
+				
+//				System.out.println("containFlag:"+containFlag);
+				
+				if (containFlag == false) {
+					viewList.add(boardnum);
+					session.setAttribute("viewList", viewList);
+					bdao.hitUp(boardnum);
+				}
+			}
+//			System.out.println(viewList);
+		}	
+//		System.out.println();
+		
+		BoardDto bdto = bdao.content(boardnum);
+		
+		model.addAttribute("bdto", bdto);
+		
+		return "content";
+	}
+	
+	
+	
+	/* 글 수정 */
+	// 글작성자가 아니면 글 수정을 못누르게 수정해야함
+	@PostMapping("/editPost")
+	public String editPost(HttpServletRequest request, Model model, HttpSession session) {
+		
+		String boardnum = request.getParameter("boardnum"); 
+		String sessionNickname = (String) session.getAttribute("sessionNickname");
+		boolean idCheckFlag = request.getParameter("nickname").equals(sessionNickname);
+		
+		BoardDao bdao = sqlSession.getMapper(BoardDao.class);
+		BoardDto bdto = bdao.content(boardnum);
+		
+		model.addAttribute("bdto", bdto);
+		model.addAttribute("idCheckFlag", idCheckFlag);
+		
+		return "editPost";
+	}
+	
+	
+	@PostMapping("/editPostOk")
+	public String editPostOk(HttpServletRequest request, Model model) {
+		
+		LocalDateTime localtime = LocalDateTime.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		String now = localtime.format(formatter);
+		
+		BoardDao bdao = sqlSession.getMapper(BoardDao.class);
+		bdao.editPost(request.getParameter("title"),
+						request.getParameter("content"),
+						now, 
+						request.getParameter("boardnum"));
+		
+		model.addAttribute("boardnum", request.getParameter("boardnum"));
+		
+		return "redirect:/content?boardnum=" + request.getParameter("boardnum");
+	}
+	
+	
+	
+	@RequestMapping("/deletePost")
+	public String deletePost(HttpServletRequest request, HttpSession session, HttpServletResponse response) {
+		
+		String boardnum = request.getParameter("boardnum"); 
+		String sessionNickname = (String) session.getAttribute("sessionNickname");
+		
+		BoardDao bdao = sqlSession.getMapper(BoardDao.class);
+		
+		boolean idCheckFlag = bdao.content(boardnum).getNickname().equals(sessionNickname);
+		
+		if (idCheckFlag) {
+			// 작성자인 경우
+			bdao.delete(boardnum);
+			
+			return "redirect:board";
+			
+		} else {
+			// 컨트롤러에서 경고창 띄우기
+			try {
+				// 경고창 텍스트를 인코딩
+				response.setContentType("text/html;charset=utf-8");
+				// 다시 인코딩 해줘야함
+				response.setCharacterEncoding("utf-8");
+				PrintWriter printWriter = response.getWriter();
+				printWriter.println("<script>alert('"+"글 삭제는 작성자만 가능합니다."+"');history.back();</script>");
+				printWriter.flush();
+				
+				return "redirect:/content?boardnum=" + boardnum;
+			
+			} catch (IOException e) {
+				e.printStackTrace();
+			
+				return "redirect:/content?boardnum=" + boardnum;
+			}
+		}
+	}
+	
+	
 }
+

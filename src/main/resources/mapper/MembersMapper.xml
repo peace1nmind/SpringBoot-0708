@@ -37,12 +37,12 @@
 	
 	<!-- 회원정보 수정 -->
 	<update id="modify">
-		UDAPTE p_members_tbl
+		UPDATE p_members_tbl
 		SET pw = #{param2},
 			name = #{param3}, 
 			nickname = #{param4}, 
 			phone = #{param5}, 
-			email = #{parma6}
+			email = #{param6} 
 		WHERE id = #{param1}
 	</update>
 

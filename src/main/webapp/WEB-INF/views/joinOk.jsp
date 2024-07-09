@@ -57,7 +57,7 @@
 						<td align="center">
 							<span class="content_text">
 							${name }님 회원가입을 축하드립니다.<br>
-							가입하신 아이디는 ${nickname }(${id })입니다.<br>
+							가입하신 닉네임(아이디)는 ${nickname }(${id })입니다.<br>
 							로그인 하신 후 글을 작성하실 수 있습니다.
 							</span>
 						</td>

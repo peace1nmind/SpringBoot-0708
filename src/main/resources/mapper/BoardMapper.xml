@@ -7,11 +7,44 @@
 <mapper namespace="com.peace1nmind.d0708.dao.BoardDao">
 	
 	<!-- p_board_tbl 
-		 boardnum, nickname, writer, title, content, hit, postdate -->
+		 boardnum, nickname, writer, title, content, hit, postdate, editdate -->
 	
 	<!-- 글 작성 -->
 	<insert id="write">
 		INSERT INTO p_board_tbl (boardnum, nickname, writer, title, content)
 		VALUES (p_board_seq.nextval, #{param1}, #{param2}, #{param3}, #{param4})
 	</insert>
+	
+	<!-- 글 목록 -->
+	<select id="list" resultType="com.peace1nmind.d0708.dto.BoardDto">
+		SELECT * FROM p_board_tbl ORDER BY boardnum DESC
+	</select>
+	
+	<!-- 글 내용 -->
+	<select id="content" resultType="com.peace1nmind.d0708.dto.BoardDto">
+		SELECT * FROM p_board_tbl WHERE boardnum=#{param1}
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="hitUp">
+		UPDATE p_board_tbl
+		SET hit = hit+1 
+		WHERE boardnum=#{param1}
+	</update>
+	
+	<!-- 글 수정 -->
+	<update id="editPost">
+		UPDATE p_board_tbl
+		SET title = #{param1},
+			content = #{param2},
+			editdate = TO_DATE(#{param3}, 'YYYY-MM-DD HH24:MI:SS')
+		WHERE boardnum=#{param4}
+	</update>
+	
+	<!-- 글 삭제 -->
+	<delete id="delete">
+		DELETE FROM p_board_tbl 
+		WHERE boardnum=#{param1}
+	</delete>
+	
 </mapper>

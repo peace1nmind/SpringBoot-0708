@@ -38,7 +38,7 @@ input.input_box02 {
 
 .input_phone {
 	border: 1px solid #05445E;
-	width: 70px;
+	width: 80px;
 	font-family: Arial;
 	font-size: 20px;
 	padding: 5px;
@@ -85,5 +85,9 @@ textarea {
 	font-size: 20px;
 	font-family: NanumGothic, Arial;
 	padding: 5px;
+	color: #000000;
 	width: 500px;
+	height: auto;
+	resize: none;
 }
+

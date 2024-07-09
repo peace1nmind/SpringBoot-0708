@@ -354,6 +354,10 @@ public class Controller {
 		String sessionNickname = (String) session.getAttribute("sessionNickname");
 		boolean idCheckFlag = request.getParameter("nickname").equals(sessionNickname);
 		
+		if ("관리자".equals(sessionNickname)) {
+			idCheckFlag = true;
+		}
+		
 		BoardDao bdao = sqlSession.getMapper(BoardDao.class);
 		BoardDto bdto = bdao.content(boardnum);
 		
@@ -384,6 +388,7 @@ public class Controller {
 	
 	
 	
+	/* 글 삭제 */
 	@RequestMapping("/deletePost")
 	public String deletePost(HttpServletRequest request, HttpSession session, HttpServletResponse response) {
 		
@@ -393,6 +398,10 @@ public class Controller {
 		BoardDao bdao = sqlSession.getMapper(BoardDao.class);
 		
 		boolean idCheckFlag = bdao.content(boardnum).getNickname().equals(sessionNickname);
+		
+		if ("관리자".equals(sessionNickname)) {
+			idCheckFlag = true;
+		}
 		
 		if (idCheckFlag) {
 			// 작성자인 경우
@@ -420,6 +429,44 @@ public class Controller {
 			}
 		}
 	}
+	
+	
+	
+	/* 글 검색 */
+	@GetMapping("/search")
+	public String search(HttpServletRequest request, Model model) {
+		
+		String searchType = request.getParameter("searchType");
+		String searchDetail = request.getParameter("searchDetail");
+		
+		BoardDao bdao = sqlSession.getMapper(BoardDao.class);
+		ArrayList<BoardDto> blist = new ArrayList<BoardDto>();
+		
+		if (searchType.equals("제목")) {
+			blist = bdao.search_byTitle(searchDetail);
+			model.addAttribute("blist", blist);
+		} else if (searchType.equals("제목+내용")) {
+			blist = bdao.search_byTitleContent(searchDetail);
+			model.addAttribute("blist", blist);
+		} else if (searchType.equals("닉네임")) {
+			blist = bdao.search_byNickname(searchDetail);
+			model.addAttribute("blist", blist);
+		} else if (searchType.equals("작성자")) {
+			blist = bdao.search_byWriter(searchDetail);
+			model.addAttribute("blist", blist);
+		} 
+		
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("searchDetail", searchDetail);
+		model.addAttribute("emptyFlag", blist.isEmpty());
+		model.addAttribute("error", searchType + "이 " + searchDetail + "인 게시물은 없습니다");
+		
+		return "search";
+	}
+	
+	
+	
+	
 	
 	
 }

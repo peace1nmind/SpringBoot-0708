@@ -15,7 +15,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>Board</title>
+<title>Search</title>
 
 <link rel="stylesheet" href="/resources/css/title.css">
 <link rel="stylesheet" href="/resources/css/content.css">
@@ -24,7 +24,7 @@
 <script type="text/javascript" src="resources/js/search.js"></script>
 
 </head>
-<body>
+<body onload="searchCur()">
 	
 	<%@ include file="include/header.jsp" %>
 	
@@ -47,16 +47,14 @@
 					<tr align="center">
 						<td colspan="7">
 							<form action="search" name="searchForm" onsubmit="return searchCheck()">
-								<select name="searchType" class="search_type">
-									<option value="제목">제목</option>
-									<option value="제목+내용">제목+내용</option>
-									<option value="닉네임">닉네임</option>
-									<option value="작성자">작성자</option>
-								</select>
-								
-								<input type="text" name="searchDetail" class="search_box">
-								<input type="submit" value="검색" class="button">
-								
+							<select name="searchType" class="search_type">
+								<option value="제목" <%= "제목".equals(request.getParameter("searchType")) ? "selected" : "" %>>제목</option>
+								<option value="제목+내용" <%= "제목+내용".equals(request.getParameter("searchType")) ? "selected" : "" %>>제목+내용</option>
+								<option value="닉네임" <%= "닉네임".equals(request.getParameter("searchType")) ? "selected" : "" %>>닉네임</option>
+								<option value="작성자" <%= "작성자".equals(request.getParameter("searchType")) ? "selected" : "" %>>작성자</option>
+							</select>
+							<input type="text" name="searchDetail" class="search_box" value="${searchDetail }">
+							<input type="submit" value="검색" class="button">
 							</form>
 						</td>
 					</tr>
@@ -70,7 +68,9 @@
 						<th class="board_item" width="13%">등록일</th>
 						<th class="board_item_end" width="13%">수정일</th>
 					</tr>
-
+					
+					<c:choose>
+					<c:when test="${!emptyFlag }">
 					<c:forEach items="${blist }" var="bdto">
 						<tr align="center">
 							<td class="board_content">${bdto.boardnum }</td>
@@ -106,9 +106,16 @@
 							</td>
 						</tr>
 					</c:forEach>
-					
+					</c:when>
+					<c:otherwise>
+						<tr>
+							<th class="board_content_end" colspan="7" style="color: #FF5675;">${error }</th>
+						</tr>
+					</c:otherwise>
+					</c:choose>
 					<tr>
 						<td colspan="7" align="right">
+							<input class="button" type="button" value="글 목록" onclick="window.location.href='board'">
 							<input class="button" type="button" value="글쓰기" onclick="window.location.href='write'">
 						</td>
 					</tr>

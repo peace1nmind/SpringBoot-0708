@@ -47,4 +47,32 @@
 		WHERE boardnum=#{param1}
 	</delete>
 	
+	<!-- 글 검색 -->
+	<!-- byTitle -->
+	<select id="search_byTitle" resultType="com.peace1nmind.d0708.dto.BoardDto">
+		SELECT * FROM p_board_tbl 
+		WHERE title LIKE '%' || #{param1} || '%'
+		ORDER BY boardnum DESC
+	</select>
+	
+	<!-- byTitleContent -->
+	<select id="search_byTitleContent" resultType="com.peace1nmind.d0708.dto.BoardDto">
+		SELECT * FROM p_board_tbl 
+		WHERE title LIKE '%' || #{param1} || '%'
+		OR content LIKE '%' || #{param1} || '%'
+		ORDER BY boardnum DESC
+	</select>
+	
+	<!-- byNickname -->
+	<select id="search_byNickname" resultType="com.peace1nmind.d0708.dto.BoardDto">
+		SELECT * FROM p_board_tbl WHERE nickname LIKE '%' || #{param1} || '%'
+		ORDER BY boardnum DESC
+	</select>
+	
+	<!-- byWriter -->
+	<select id="search_byWriter" resultType="com.peace1nmind.d0708.dto.BoardDto">
+		SELECT * FROM p_board_tbl WHERE writer LIKE '%' || #{param1} || '%'
+		ORDER BY boardnum DESC
+	</select>
+	
 </mapper>

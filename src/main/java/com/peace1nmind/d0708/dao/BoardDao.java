@@ -1,5 +1,6 @@
 package com.peace1nmind.d0708.dao;
 
+
 import java.util.ArrayList;
 
 import com.peace1nmind.d0708.dto.BoardDto;
@@ -23,5 +24,11 @@ public interface BoardDao {
 	
 	// 글 삭제
 	public void delete(String boardnum);
+	
+	// 글 검색
+	public ArrayList<BoardDto> search_byTitle(String searchDetail);			// 제목 검색
+	public ArrayList<BoardDto> search_byTitleContent(String searchDetail);	// 제목+내용 검색
+	public ArrayList<BoardDto> search_byNickname(String searchDetail);		// 닉네임 검색
+	public ArrayList<BoardDto> search_byWriter(String searchDetail);		// 작성자 검색
 	
 }

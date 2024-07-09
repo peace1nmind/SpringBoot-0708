@@ -316,7 +316,7 @@ public class Controller {
 				viewList.add(boardnum);
 				session.setAttribute("viewList", viewList);
 				
-				System.out.println("vieList:" + session.getAttribute("viewList"));
+				System.out.println("viewList:" + session.getAttribute("viewList"));
 			} else {
 				boolean containFlag = false;
 				

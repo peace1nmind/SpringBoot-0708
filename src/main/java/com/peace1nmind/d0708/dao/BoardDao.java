@@ -11,7 +11,7 @@ public interface BoardDao {
 	public void write(String nickname, String writer, String title, String contnet);
 	
 	// 글 목록
-	public ArrayList<BoardDto> list();
+	public ArrayList<BoardDto> list(int amount, int pageNum);
 	
 	// 글 내용
 	public BoardDto content(String boardnum);

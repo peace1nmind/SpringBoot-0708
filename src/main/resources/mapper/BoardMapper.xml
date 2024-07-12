@@ -19,7 +19,11 @@
 	
 	<!-- 글 목록 -->
 	<select id="list" resultType="com.peace1nmind.d0708.dto.BoardDto">
-		SELECT * FROM p_board_tbl ORDER BY boardnum DESC
+		SELECT * FROM 
+			(SELECT BOARD.*, CEIL((ROWNUM/#{param1}))pagenum, ROWNUM
+				FROM
+					(SELECT * FROM p_board_tbl ORDER BY boardnum DESC)BOARD)
+						WHERE pagenum=#{param2}
 	</select>
 	
 	

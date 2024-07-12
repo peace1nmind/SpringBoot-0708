@@ -121,7 +121,7 @@
 								onclick="window.location.href='board?pageNum=${pdto.startPage-pdto.perPage }'">
 							</c:if>
 							
-							<c:forEach begin="${pdto.startPage }" end="${pdto.endPage }" var="page">
+							<c:forEach begin="${pdto.startPage }" end="${pdto.endPage }" var="page" >
 								${page }
 							</c:forEach>
 							

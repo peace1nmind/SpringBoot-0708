@@ -48,7 +48,7 @@ public class PageDto {
 		this.criteria = criteria;
 		
 		// Math.ceil 함수를 통해서 올림
-		this.endPage = (int) (Math.ceil(criteria.getPageNum() / this.perPage*1.0) * 10);
+		this.endPage = (int) ((Math.ceil(criteria.getPageNum() / this.perPage*1.0)) * 10);
 		this.startPage = this.endPage - 9;
 		
 		// 총 글 수로 계산한 마지막 페이지 (ex - 총 글의 개수 128개면 13이 나게끔)

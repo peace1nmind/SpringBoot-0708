@@ -67,7 +67,7 @@
 							<span class="content_text">제목 </span> 
 						</td>
 						<td class="content_text">
-							<input class="input_box02" type="text" name="title">
+							<input class="input_box02" type="text" name="title" oninput="limitText(this, 200)">
 						</td>
 					</tr>
 					
@@ -76,7 +76,7 @@
 							<span class="content_text">내용 </span> 
 						</td>
 						<td class="content_text">
-							<textarea rows="10" cols="40" name="content"></textarea>
+							<textarea rows="10" cols="40" name="content" oninput="limitText(this, 500)"></textarea>
 						</td>
 					</tr>
 					

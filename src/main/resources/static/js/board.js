@@ -39,3 +39,10 @@ function breakLines(content) {
     return result;
 }
 
+// 최대 글자수 제한 함수
+function limitText(field, maxChars) {
+    if (field.value.length > maxChars) {
+        field.value = field.value.substring(0, maxChars);
+        alert('최대 ' + maxChars + '자까지 입력 가능합니다.');
+    }
+}

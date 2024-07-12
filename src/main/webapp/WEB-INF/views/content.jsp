@@ -101,6 +101,20 @@
 					</tr>
 					
 					<!-- 댓글 기능 추가 -->
+					<tr>
+						<td class="content_item">
+							<span class="content_text">댓글 </span>
+						</td>
+						<td class="content_text">
+							<tr>
+								<td>
+									<textarea rows="3" cols="40" name="comment" oninput="limitText(this, 300)"></textarea>
+								</td>
+							</tr>
+							<tr>
+								<td><input type="submit" value="댓글 쓰기" onclick="winodw.location.href='comment?boadnum=${bdto.boardnum}'"></td>
+							</tr>
+						</td>
 					
 					<tr>
 						<td colspan="2">&nbsp;</td>

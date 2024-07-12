@@ -50,7 +50,7 @@
 								<span class="content_text">아이디 </span> 
 							</td>
 							<td>
-								<input class="input_box" type="text" name="id" value="${mdto.id }" readonly="readonly">
+								<input class="input_box_ro" type="text" name="id" value="${mdto.id }" readonly="readonly">
 							</td>
 						</tr>
 						
@@ -79,7 +79,7 @@
 							<td>
 								<c:choose>
 									<c:when test="${mdto.name.equals('관리자') }">
-										<input class="input_box" type="text" name="name" value="${mdto.name }" readonly="readonly">
+										<input class="input_box_ro" type="text" name="name" value="${mdto.name }" readonly="readonly">
 									</c:when>
 									<c:otherwise>
 										<input class="input_box" type="text" name="name" value="${mdto.name }">
@@ -95,7 +95,7 @@
 							<td>
 								<c:choose>
 									<c:when test="${mdto.nickname.equals('관리자') }">
-										<input class="input_box" type="text" name="nickname" value="${mdto.nickname }" readonly="readonly">
+										<input class="input_box_ro" type="text" name="nickname" value="${mdto.nickname }" readonly="readonly">
 									</c:when>
 									<c:otherwise>
 										<input class="input_box" type="text" name="nickname" value="${mdto.nickname }">

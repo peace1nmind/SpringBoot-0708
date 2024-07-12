@@ -399,13 +399,27 @@ public class Controller {
 		
 		boolean idCheckFlag = bdao.content(boardnum).getNickname().equals(sessionNickname);
 		
-		if ("관리자".equals(sessionNickname)) {
+		if (sessionNickname.equals("관리자")) {
 			idCheckFlag = true;
 		}
 		
 		if (idCheckFlag) {
 			// 작성자인 경우
 			bdao.delete(boardnum);
+			
+			// 컨트롤러에서 경고창 띄우기
+			try {
+				// 경고창 텍스트를 인코딩
+				response.setContentType("text/html;charset=utf-8");
+				// 다시 인코딩 해줘야함
+				response.setCharacterEncoding("utf-8");
+				PrintWriter printWriter = response.getWriter();
+				printWriter.println("<script>alert('"+"글이 삭제되었습니다."+"');window.location.href="+"'board'"+";</script>");
+				printWriter.flush();
+			
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			
 			return "redirect:board";
 			

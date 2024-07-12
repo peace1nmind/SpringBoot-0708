@@ -36,6 +36,15 @@ input.input_box {
 	padding: 5px;
 }
 
+input.input_box_ro {
+	border: 1px solid #05445E;
+	width: 250px;
+	font-family: Arial;
+	font-size: 20px;
+	padding: 5px;
+	background-color: #E8F5FF;
+}
+
 input.input_box02 {
 	border: 1px solid #05445E;
 	width: 500px;

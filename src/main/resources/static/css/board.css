@@ -41,6 +41,7 @@ td.board_content_end, th.board_content_end {
 a.board_content:hover {
 	font-family: NanumGothic, Arial;
 	font-size: 20px;
+	font-weight: normal;
 	cursor: pointer;
 	color: #000000;
 }
@@ -93,7 +94,7 @@ a.board_content:visited {
     color: #fff;
     text-align: center;
     border-radius: 6px;
-    padding: 5px 0;
+    padding: 5px;
 
     /* Position the tooltip */
     position: absolute;
@@ -116,8 +117,8 @@ a.board_content:visited {
 
 /* 검색 기능 관련 */
 .search_box {
-	border: 2px solid #3D550C;
-	width: 69%;
+	border: 2px solid #05445E;
+	width: 65%;
 	height: 28px;
 	font-family: NanumGothic;
 	font-size: 20px;
@@ -126,7 +127,7 @@ a.board_content:visited {
 }
 
 .search_type {
-	border: 2px solid #3D550C;
+	border: 2px solid #05445E;
 	width: 15%;
 	height: 40px;
 	font-family: NanumGothic;

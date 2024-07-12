@@ -100,6 +100,8 @@
 						<td align="center" class="content_text">${bdto.editdate }</td>
 					</tr>
 					
+					<!-- 댓글 기능 추가 -->
+					
 					<tr>
 						<td colspan="2">&nbsp;</td>
 					</tr>

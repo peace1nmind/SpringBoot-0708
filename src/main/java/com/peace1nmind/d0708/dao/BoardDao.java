@@ -31,4 +31,7 @@ public interface BoardDao {
 	public ArrayList<BoardDto> search_byNickname(String searchDetail);		// 닉네임 검색
 	public ArrayList<BoardDto> search_byWriter(String searchDetail);		// 작성자 검색
 	
+	// 게시판 총 글 수
+	public int boardTotalCount();
+	
 }

@@ -4,7 +4,7 @@ package com.peace1nmind.d0708.dto;
 
 public class PageDto {
 	
-	private double perPage = 10.0;		// 페이지 분할 개수
+	private int perPage = 10;		// 페이지 분할 개수
 	private int startPage;		// 화면에 보여질 하단 페이지 번호 중 시작 페이지 번호
 	private int endPage;		// 화면에 보여질 하단 페이지 번호 중 마지막 페이지 번호
 	private boolean next;		// 현재 보여지고 있는 페이지 이상으로 페이지가 더 있는지 여부
@@ -18,9 +18,8 @@ public class PageDto {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	public PageDto(double perPage, int startPage, int endPage, boolean next, boolean prev, int total,
-			Criteria criteria) {
+
+	public PageDto(int perPage, int startPage, int endPage, boolean next, boolean prev, int total, Criteria criteria) {
 		super();
 		this.perPage = perPage;
 		this.startPage = startPage;
@@ -49,7 +48,7 @@ public class PageDto {
 		this.criteria = criteria;
 		
 		// Math.ceil 함수를 통해서 올림
-		this.endPage = (int) (Math.ceil(criteria.getPageNum() / this.perPage) * 10);
+		this.endPage = (int) (Math.ceil(criteria.getPageNum() / this.perPage*1.0) * 10);
 		this.startPage = this.endPage - 9;
 		
 		// 총 글 수로 계산한 마지막 페이지 (ex - 총 글의 개수 128개면 13이 나게끔)
@@ -69,7 +68,7 @@ public class PageDto {
 		return perPage;
 	}
 
-	public void setPerPage(double perPage) {
+	public void setPerPage(int perPage) {
 		this.perPage = perPage;
 	}
 

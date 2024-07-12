@@ -62,6 +62,12 @@
 					</tr>
 					
 					<tr>
+						<td colspan="7">
+							<div class="board_total">총 글수 : ${pdto.total }</div>
+						</td>
+					</tr>
+					
+					<tr>
 						<th class="board_item" width="7%">번호</th>
 						<th class="board_item" width="10%">닉네임</th>
 						<th class="board_item" width="10%">작성자</th>
@@ -106,6 +112,25 @@
 							</td>
 						</tr>
 					</c:forEach>
+					
+					<!-- 페이지 표시 -->
+					<tr>
+						<td colspan="7" align="center">
+							<c:if test="${pdto.prev }">
+								<input class="page" type="button" value="◀" 
+								onclick="window.location.href='board?pageNum=${pdto.startPage-pdto.perPage }'">
+							</c:if>
+							
+							<c:forEach begin="${pdto.startPage }" end="${pdto.endPage }" var="page">
+								${page }
+							</c:forEach>
+							
+							<c:if test="${pdto.next }">
+								<input class="page" type="button" value="▶" 
+								onclick="window.location.href='board?pageNum=${pdto.startPage+pdto.perPage }'">
+							</c:if>
+						</td>
+					</tr>
 					
 					<tr>
 						<td colspan="7" align="right">

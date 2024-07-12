@@ -14,10 +14,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.peace1nmind.d0708.dao.BoardDao;
+import com.peace1nmind.d0708.dao.CommentDao;
 import com.peace1nmind.d0708.dao.MembersDao;
 import com.peace1nmind.d0708.dto.BoardDto;
+import com.peace1nmind.d0708.dto.CommentDto;
+import com.peace1nmind.d0708.dto.Criteria;
 import com.peace1nmind.d0708.dto.EmailDto;
 import com.peace1nmind.d0708.dto.MembersDto;
+import com.peace1nmind.d0708.dto.PageDto;
 import com.peace1nmind.d0708.dto.PhoneDto;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -280,12 +284,27 @@ public class Controller {
 	
 	/* 글 목록 */
 	@GetMapping("/board")
-	public String board(Model model) {
+	public String board(Model model, Criteria criteria, HttpServletRequest request) {
 		
 		BoardDao bdao = sqlSession.getMapper(BoardDao.class);
+		
+		// 유저가 클릭한 페이지 번호
+		String pageNum = request.getParameter("pageNum");
+		
+		if (pageNum != null) {
+			// criteria의 pageNum을 유저가 클릭한 페이지 번호로 세팅
+			criteria.setPageNum(Integer.parseInt(pageNum));
+		}
+		
+		// 게시판 내 모든 글의 총 개수
+		int total = bdao.boardTotalCount();
+		
+		PageDto pdto = new PageDto(total, criteria);
+		
 		ArrayList<BoardDto> blist = bdao.list();
 		
 		model.addAttribute("blist", blist);
+		model.addAttribute("pdto", pdto);
 		
 		return "board";
 	}
@@ -300,12 +319,11 @@ public class Controller {
 		String boardnum = request.getParameter("boardnum");
 		
 		BoardDao bdao = sqlSession.getMapper(BoardDao.class);
+		CommentDao cdao = sqlSession.getMapper(CommentDao.class);
 		
 		ArrayList<String> viewList = (ArrayList<String>) session.getAttribute("viewList");
 		
-//		System.out.println("viewList:"+viewList);
-//		System.out.println("isEmpty:"+(viewList == null));
-		
+		// 조회수 증가 (중복 제거)
 		if (!bdao.content(boardnum).getNickname().equals(session.getAttribute("sessionNickname"))) {
 			
 			if (viewList==null) {
@@ -322,21 +340,19 @@ public class Controller {
 					containFlag = true;
 				}
 				
-//				System.out.println("containFlag:"+containFlag);
-				
 				if (containFlag == false) {
 					viewList.add(boardnum);
 					session.setAttribute("viewList", viewList);
 					bdao.hitUp(boardnum);
 				}
 			}
-//			System.out.println(viewList);
 		}	
-//		System.out.println();
 		
 		BoardDto bdto = bdao.content(boardnum);
+		ArrayList<CommentDto> clist = cdao.commentList(boardnum);
 		
 		model.addAttribute("bdto", bdto);
+		model.addAttribute("clist", clist);
 		
 		return "content";
 	}
@@ -476,8 +492,6 @@ public class Controller {
 		
 		return "search";
 	}
-	
-	
 	
 	
 	

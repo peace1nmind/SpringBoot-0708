@@ -294,6 +294,9 @@ public class Controller {
 		if (pageNum != null) {
 			// criteria의 pageNum을 유저가 클릭한 페이지 번호로 세팅
 			criteria.setPageNum(Integer.parseInt(pageNum));
+		} else {
+			pageNum ="1";
+			criteria.setPageNum(1);
 		}
 		
 		// 게시판 내 모든 글의 총 개수
@@ -305,6 +308,7 @@ public class Controller {
 		
 		model.addAttribute("blist", blist);
 		model.addAttribute("pdto", pdto);
+		model.addAttribute("nowPage", pageNum);	// 현재 출력하고 있는 페이지 번호
 		
 		return "board";
 	}
@@ -462,7 +466,7 @@ public class Controller {
 	
 	/* 글 검색 */
 	@GetMapping("/search")
-	public String search(HttpServletRequest request, Model model) {
+	public String search(HttpServletRequest request, Model model, Criteria criteria) {
 		
 		String searchType = request.getParameter("searchType");
 		String searchDetail = request.getParameter("searchDetail");
@@ -470,20 +474,51 @@ public class Controller {
 		BoardDao bdao = sqlSession.getMapper(BoardDao.class);
 		ArrayList<BoardDto> blist = new ArrayList<BoardDto>();
 		
-		if (searchType.equals("제목")) {
-			blist = bdao.search_byTitle(searchDetail);
-			model.addAttribute("blist", blist);
-		} else if (searchType.equals("제목+내용")) {
-			blist = bdao.search_byTitleContent(searchDetail);
-			model.addAttribute("blist", blist);
-		} else if (searchType.equals("닉네임")) {
-			blist = bdao.search_byNickname(searchDetail);
-			model.addAttribute("blist", blist);
-		} else if (searchType.equals("작성자")) {
-			blist = bdao.search_byWriter(searchDetail);
-			model.addAttribute("blist", blist);
-		} 
+		// 유저가 클릭한 페이지 번호
+		String pageNum = request.getParameter("pageNum");
 		
+		if (pageNum != null) {
+			// criteria의 pageNum을 유저가 클릭한 페이지 번호로 세팅
+			criteria.setPageNum(Integer.parseInt(pageNum));
+		} else {
+			pageNum ="1";
+			criteria.setPageNum(1);
+		}
+		
+		// 게시판 내 모든 글의 총 개수
+		int total;
+		PageDto pdto;
+		
+		if (searchType.equals("제목")) {
+			blist = bdao.search_byTitle(searchDetail,criteria.getAmount(), criteria.getPageNum());
+			total = bdao.searchTotalCount_byTitle(searchDetail);
+			pdto = new PageDto(total, criteria);
+			model.addAttribute("blist", blist);
+			model.addAttribute("pdto", pdto);
+			model.addAttribute("nowPage", pageNum);		// 현재 출력하고 있는 페이지 번호
+		} else if (searchType.equals("제목+내용")) {
+			blist = bdao.search_byTitleContent(searchDetail,criteria.getAmount(), criteria.getPageNum());
+			total = bdao.searchTotalCount_byTitleContent(searchDetail);
+			pdto = new PageDto(total, criteria);
+			model.addAttribute("blist", blist);
+			model.addAttribute("pdto", pdto);
+			model.addAttribute("nowPage", pageNum);
+		} else if (searchType.equals("닉네임")) {
+			blist = bdao.search_byNickname(searchDetail,criteria.getAmount(), criteria.getPageNum());
+			total = bdao.searchTotalCount_byNickname(searchDetail);
+			pdto = new PageDto(total, criteria);
+			model.addAttribute("blist", blist);
+			model.addAttribute("pdto", pdto);
+			model.addAttribute("nowPage", pageNum);
+		} else if (searchType.equals("작성자")) {
+			blist = bdao.search_byWriter(searchDetail,criteria.getAmount(), criteria.getPageNum());
+			total = bdao.searchTotalCount_byWriter(searchDetail);
+			pdto = new PageDto(total, criteria);
+			model.addAttribute("blist", blist);
+			model.addAttribute("pdto", pdto);
+			model.addAttribute("nowPage", pageNum);
+		} 
+				
 		model.addAttribute("searchType", searchType);
 		model.addAttribute("searchDetail", searchDetail);
 		model.addAttribute("emptyFlag", blist.isEmpty());

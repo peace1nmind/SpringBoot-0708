@@ -61,35 +61,85 @@
 	<!-- 글 검색 -->
 	<!-- byTitle -->
 	<select id="search_byTitle" resultType="com.peace1nmind.d0708.dto.BoardDto">
-		SELECT * FROM p_board_tbl 
-		WHERE title LIKE '%' || #{param1} || '%'
-		ORDER BY boardnum DESC
+		SELECT * FROM 
+			(SELECT BOARD.*, CEIL((ROWNUM/#{param2}))pagenum, ROWNUM
+				FROM
+					(SELECT * FROM p_board_tbl 
+					WHERE title LIKE '%' || #{param1} || '%'
+					ORDER BY boardnum DESC)BOARD)
+						WHERE pagenum=#{param3}
 	</select>
 	
 	<!-- byTitleContent -->
 	<select id="search_byTitleContent" resultType="com.peace1nmind.d0708.dto.BoardDto">
-		SELECT * FROM p_board_tbl 
-		WHERE title LIKE '%' || #{param1} || '%'
-		OR content LIKE '%' || #{param1} || '%'
-		ORDER BY boardnum DESC
+		SELECT * FROM 
+			(SELECT BOARD.*, CEIL((ROWNUM/#{param2}))pagenum, ROWNUM
+				FROM
+					(SELECT * FROM p_board_tbl 
+					WHERE title LIKE '%' || #{param1} || '%'
+					OR content LIKE '%' || #{param1} || '%'
+					ORDER BY boardnum DESC)BOARD)
+						WHERE pagenum=#{param3}
 	</select>
 	
 	<!-- byNickname -->
 	<select id="search_byNickname" resultType="com.peace1nmind.d0708.dto.BoardDto">
-		SELECT * FROM p_board_tbl WHERE nickname LIKE '%' || #{param1} || '%'
-		ORDER BY boardnum DESC
+		SELECT * FROM 
+			(SELECT BOARD.*, CEIL((ROWNUM/#{param2}))pagenum, ROWNUM
+				FROM
+					(SELECT * FROM p_board_tbl 
+					WHERE nickname 
+					LIKE '%' || #{param1} || '%'
+					ORDER BY boardnum DESC)BOARD)
+						WHERE pagenum=#{param3}
 	</select>
 	
 	<!-- byWriter -->
 	<select id="search_byWriter" resultType="com.peace1nmind.d0708.dto.BoardDto">
-		SELECT * FROM p_board_tbl WHERE writer LIKE '%' || #{param1} || '%'
-		ORDER BY boardnum DESC
+		SELECT * FROM 
+			(SELECT BOARD.*, CEIL((ROWNUM/#{param2}))pagenum, ROWNUM
+				FROM
+					(SELECT * FROM p_board_tbl 
+					WHERE writer 
+					LIKE '%' || #{param1} || '%'
+					ORDER BY boardnum DESC)BOARD)
+						WHERE pagenum=#{param3}
 	</select>
 	
 	
 	<!-- 게시판 총 글 수 -->
 	<select id="boardTotalCount" resultType="int">
 		SELECT COUNT(*) FROM p_board_tbl
+	</select>
+	
+	
+	<!-- 검색 총 글 수 -->
+	<!-- byTitle -->
+	<select id="searchTotalCount_byTitle" resultType="int">
+		SELECT COUNT(*) FROM p_board_tbl 
+		WHERE title 
+		LIKE '%' || #{param1} || '%'
+	</select>
+	
+	<!-- byTitleContent -->
+	<select id="searchTotalCount_byTitleContent" resultType="int">
+		SELECT COUNT(*) FROM p_board_tbl 
+		WHERE title LIKE '%' || #{param1} || '%'
+		OR content LIKE '%' || #{param1} || '%'
+	</select>
+	
+	<!-- byNickname -->
+	<select id="searchTotalCount_byNickname" resultType="int">
+		SELECT COUNT(*) FROM p_board_tbl 
+		WHERE nickname 
+		LIKE '%' || #{param1} || '%'
+	</select>
+	
+	<!-- byWriter -->
+	<select id="searchTotalCount_byWriter" resultType="int">
+		SELECT COUNT(*) FROM p_board_tbl 
+		WHERE writer 
+		LIKE '%' || #{param1} || '%'
 	</select>
 	
 	

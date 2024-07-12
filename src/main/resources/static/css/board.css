@@ -138,4 +138,60 @@ a.board_content:visited {
 
 
 
+/* 페이징 */
+.page {
+	font-family: NanumGothic, Arial;
+	font-size: 24px;
+}
 
+a.page:hover {
+	text-decoration: none;
+	font-family: NanumGothic, Arial;
+	font-size: 24px;
+	font-weight: normal;
+	cursor: pointer;
+	color: #787878;
+	font-weight: bold;
+}
+
+a.page:visited {
+	text-decoration: none;
+	font-family: NanumGothic, Arial;
+	font-size: 24px;
+	cursor: pointer;
+	color: #000000;
+}
+
+a.page:visited:hover {
+	color: #787878;
+}
+
+span.nowPage {
+	font-weight: bold;
+	font-size: 24px;
+	background-color: #9BC3FF;
+}
+
+div.split_columns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.page_button {
+    flex-basis: 20%;
+    text-align: center;
+}
+
+div.page_number {
+    flex-basis: 50%;
+    text-align: center;
+}
+
+div.nowPage .page {
+    font-weight: bold;
+}
+
+input.page[type='button'] {
+	width:40px;
+}

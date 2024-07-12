@@ -26,12 +26,19 @@ public interface BoardDao {
 	public void delete(String boardnum);
 	
 	// 글 검색
-	public ArrayList<BoardDto> search_byTitle(String searchDetail);			// 제목 검색
-	public ArrayList<BoardDto> search_byTitleContent(String searchDetail);	// 제목+내용 검색
-	public ArrayList<BoardDto> search_byNickname(String searchDetail);		// 닉네임 검색
-	public ArrayList<BoardDto> search_byWriter(String searchDetail);		// 작성자 검색
+	public ArrayList<BoardDto> search_byTitle(String searchDetail, int amount, int pageNum);			// 제목 검색
+	public ArrayList<BoardDto> search_byTitleContent(String searchDetail, int amount, int pageNum);		// 제목+내용 검색
+	public ArrayList<BoardDto> search_byNickname(String searchDetail, int amount, int pageNum);			// 닉네임 검색
+	public ArrayList<BoardDto> search_byWriter(String searchDetail, int amount, int pageNum);			// 작성자 검색
 	
 	// 게시판 총 글 수
 	public int boardTotalCount();
+	
+	// 글 검색 총 글 수
+	public int searchTotalCount_byTitle(String searchDtail);			// 제목 검색 총 글 수
+	public int searchTotalCount_byTitleContent(String searchDtail);		// 제목+내용 검색 총 글 수
+	public int searchTotalCount_byNickname(String searchDtail);			// 닉네임 검색 총 글 수
+	public int searchTotalCount_byWriter(String searchDtail);			// 작성자 검색 총 글 수
+	
 	
 }

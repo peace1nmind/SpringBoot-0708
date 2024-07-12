@@ -63,7 +63,9 @@
 					
 					<tr>
 						<td colspan="7">
-							<div class="board_total">총 글수 : ${pdto.total }</div>
+							<div class="board_total">
+								총 ${pdto.total } 건 &nbsp;&nbsp; ${nowPage } / ${pdto.lastPage } Page
+							</div>
 						</td>
 					</tr>
 					
@@ -113,22 +115,51 @@
 						</tr>
 					</c:forEach>
 					
+					<!--  
+					<div class="three-columns">
+	                    <div class="column">Column 1</div>
+	                    <div class="column">Column 2</div>
+	                    <div class="column">Column 3</div>
+                	</div>
+					-->
+					
 					<!-- 페이지 표시 -->
 					<tr>
 						<td colspan="7" align="center">
-							<c:if test="${pdto.prev }">
-								<input class="page" type="button" value="◀" 
-								onclick="window.location.href='board?pageNum=${pdto.startPage-pdto.perPage }'">
-							</c:if>
-							
-							<c:forEach begin="${pdto.startPage }" end="${pdto.endPage }" var="page" >
-								${page }
-							</c:forEach>
-							
-							<c:if test="${pdto.next }">
-								<input class="page" type="button" value="▶" 
-								onclick="window.location.href='board?pageNum=${pdto.startPage+pdto.perPage }'">
-							</c:if>
+							<div class="split_columns">
+								<div class="page_button">
+									<c:if test="${pdto.prev }">
+										<input class="page" type="button" value="《" 
+										onclick="window.location.href='board?pageNum=1'">
+										<input class="page" type="button" value="〈" 
+										onclick="window.location.href='board?pageNum=${pdto.startPage - pdto.perPage}'">
+									</c:if>
+								</div>
+								
+								<div class="page_number">
+									<c:forEach begin="${pdto.startPage }" end="${pdto.endPage }" var="page" >
+										<c:choose>
+											<c:when test="${page == nowPage }">
+												<span class="nowPage">
+													<span class='page' href="board?pageNum=${page }">&nbsp;${page}</span>
+												</span>
+											</c:when>
+											<c:otherwise>
+												<a class='page' href="board?pageNum=${page }">&nbsp;${page}&nbsp;</a>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+								</div>
+								
+								<div class="page_button">
+									<c:if test="${pdto.next }">
+										<input class="page" type="button" value="〉" 
+										onclick="window.location.href='board?pageNum=${pdto.startPage + pdto.perPage}'">
+										<input class="page" type="button" value="》" 
+										onclick="window.location.href='board?pageNum=${pdto.lastPage}'">
+									</c:if>
+								</div>
+							</div>
 						</td>
 					</tr>
 					

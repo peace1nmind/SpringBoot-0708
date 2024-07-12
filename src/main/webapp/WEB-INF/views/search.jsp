@@ -60,6 +60,14 @@
 					</tr>
 					
 					<tr>
+						<td colspan="7">
+							<div class="board_total">
+								총 ${pdto.total } 건 &nbsp;&nbsp; ${nowPage } / ${pdto.lastPage } Page
+							</div>
+						</td>
+					</tr>
+					
+					<tr>
 						<th class="board_item" width="7%">번호</th>
 						<th class="board_item" width="10%">닉네임</th>
 						<th class="board_item" width="10%">작성자</th>
@@ -113,6 +121,47 @@
 						</tr>
 					</c:otherwise>
 					</c:choose>
+					
+					<!-- 페이지 표시 -->
+					<tr>
+						<td colspan="7" align="center">
+							<div class="split_columns">
+								<div class="page_button">
+									<c:if test="${pdto.prev }">
+										<input class="page" type="button" value="《" 
+										onclick="window.location.href='search?searchType=${searchType }&searchDetail=${searchDetail }&pageNum=1'">
+										<input class="page" type="button" value="〈" 
+										onclick="window.location.href='search?searchType=${searchType }&searchDetail=${searchDetail }&pageNum=${pdto.startPage - pdto.perPage}'">
+									</c:if>
+								</div>
+							
+								<div class="page_number">
+									<c:forEach begin="${pdto.startPage }" end="${pdto.endPage }" var="page" >
+										<c:choose>
+											<c:when test="${page == nowPage }">
+												<span class="nowPage">
+													<span class='page' href="searach?searchType=${searchType }&searchDetail=${searchDetail }&pageNum=${page }">&nbsp;${page}</span>
+												</span>
+											</c:when>
+											<c:otherwise>
+												<a class='page' href="search?searchType=${searchType }&searchDetail=${searchDetail }&pageNum=${page }">&nbsp;${page}&nbsp;</a>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+								</div>
+							
+								<div class="page_button">
+									<c:if test="${pdto.next }">
+										<input class="page" type="button" value="〉" 
+										onclick="window.location.href='search?searchType=${searchType }&searchDetail=${searchDetail }&pageNum=${pdto.startPage + pdto.perPage}'">
+										<input class="page" type="button" value="》" 
+										onclick="window.location.href='search?searchType=${searchType }&searchDetail=${searchDetail }&pageNum=${pdto.lastPage}'">
+									</c:if>
+								</div>
+							</div>
+						</td>
+					</tr>
+					
 					<tr>
 						<td colspan="7" align="right">
 							<input class="button" type="button" value="글 목록" onclick="window.location.href='board'">

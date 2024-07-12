@@ -106,15 +106,11 @@
 							<span class="content_text">댓글 </span>
 						</td>
 						<td class="content_text">
-							<tr>
-								<td>
-									<textarea rows="3" cols="40" name="comment" oninput="limitText(this, 300)"></textarea>
-								</td>
-							</tr>
-							<tr>
-								<td><input type="submit" value="댓글 쓰기" onclick="winodw.location.href='comment?boadnum=${bdto.boardnum}'"></td>
-							</tr>
+							<textarea rows="3" cols="40" name="comment" oninput="limitText(this, 300)"></textarea>
 						</td>
+					
+						<td><input type="button" value="댓글 쓰기" onclick="window.location.href='comment?boadnum=${bdto.boardnum}'"></td>
+					</tr>
 					
 					<tr>
 						<td colspan="2">&nbsp;</td>

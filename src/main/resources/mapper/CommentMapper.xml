@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.peace1nmind.d0708.dao.CommentDao">
+	
+	<!-- p_comment_tbl
+		 boardnum, nickname, comments, commentdate, good, bad -->
+ 	
+ 	
+	<!-- 댓글 작성 -->
+	<insert id="comment">
+		INSERT INTO p_comment_tbl(boardnum, nickname, comments)
+		VALUES (#{param1}, #{param2}, #{param3})
+	</insert>
+	
+	
+	<!-- 댓글 내용 -->
+	<select id="commentList" resultType="com.peace1nmind.d0708.dto.CommentDto">
+		SELECT * FROM p_comment_tbl WHERE boardnum=#{param1}
+	</select>
+	
+	
+</mapper>

@@ -19,9 +19,7 @@ import com.peace1nmind.d0708.dto.BoardDto;
 import com.peace1nmind.d0708.dto.EmailDto;
 import com.peace1nmind.d0708.dto.MembersDto;
 import com.peace1nmind.d0708.dto.PhoneDto;
-import com.peace1nmind.d0708.dto.ViewDto;
 
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -473,7 +471,8 @@ public class Controller {
 		model.addAttribute("searchType", searchType);
 		model.addAttribute("searchDetail", searchDetail);
 		model.addAttribute("emptyFlag", blist.isEmpty());
-		model.addAttribute("error", searchType + "이 " + searchDetail + "인 게시물은 없습니다");
+		model.addAttribute("error", searchType + "에 " + 
+							"'" +searchDetail + "'" + "가 포함된 게시물이 없습니다");
 		
 		return "search";
 	}

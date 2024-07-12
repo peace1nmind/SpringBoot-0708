@@ -52,7 +52,7 @@ public class PageDto {
 		this.startPage = this.endPage - 9;
 		
 		// 총 글 수로 계산한 마지막 페이지 (ex - 총 글의 개수 128개면 13이 나게끔)
-		int lastPage = (int) Math.ceil(this.total*1.0 / criteria.getAmount()) ;
+		int lastPage = (int) Math.ceil(total*1.0 / criteria.getAmount()) ;
 		
 		// endPage가 lastPage보다 크면 빈 페이지가 생기므로 lastPage로 만들어줌
 		if (endPage > lastPage) {

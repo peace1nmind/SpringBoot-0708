@@ -301,7 +301,7 @@ public class Controller {
 		
 		PageDto pdto = new PageDto(total, criteria);
 		
-		ArrayList<BoardDto> blist = bdao.list(criteria.getAmount(), Integer.parseInt(pageNum));
+		ArrayList<BoardDto> blist = bdao.list(criteria.getAmount(), criteria.getPageNum());
 		
 		model.addAttribute("blist", blist);
 		model.addAttribute("pdto", pdto);
